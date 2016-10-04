@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Formulario Completo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/20160927_AdrianAlonso/css/estilos.css">
+    </head>
+    <body id="formulario">
+        <div>
+            <form class="" action="../FormCompleto">
+                <fieldset>
+                <legend>Datos Personales</legend>
+                    <p>Usuario: </p><br/>
+                    <input type="text" name="usuario">
+                    <p>Contrase&ntilde;a: </p>
+                    <input type="password" name="contrasena">
+                    <p>Edad: </p>
+                    <input type="number" name="edad" min="1" max="99">
+                </fieldset>
+                <fieldset>
+                    <legend>Otros</legend>
+                    <p>Estado Civil: </p>
+                    <input type="radio" name="estado" value="soltero">Soltero/a 
+                    <input type="radio" name="estado" value="casado">Casado/a
+                    <input type="radio" name="estado" value="viudo">Viudo/a
+                    <input type="radio" name="estado" value="divorciado">Divorciado/a<br/>
+                    <p>Aficciones(pulsa ctrl)</p>
+                    <select name="aficciones" multiple>
+                        <option value="musica">Musica</option>
+                        <option value="juegos">Juegos</option>
+                        <option value="tecnologia">Tecnologia</option>
+                        <option value="deporte">Deporte</option>
+                        <option value="tiendas">Tiendas</option>
+                        <option value="viaje">Viajes</option>
+                    </select>
+                    <p>Comentario: </p>
+                    <textarea name="comentario" rows="2" cols="50"></textarea>
+                </fieldset>
+                <fieldset>
+                    <legend>Medios Tecnologicos</legend>
+                    <p>¿Dispones de Internet?</p>
+                    <input type="radio" name="internet" value="si">si
+                    <input type="radio" name="internet" value="no">no<br/>
+                    <p>Sistema Operativo:</p>
+                    <select name="sistema">
+                        <option value="windows">Windows</option>
+                        <option value="macintosh">Macintosh</option>
+                        <option value="linux">Linux</option>
+                        <option value="solaris">Solaris</option>
+                    </select>
+                </fieldset>
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Limpiar">
+            </form>
+        </div>
+    </body>
+</html>

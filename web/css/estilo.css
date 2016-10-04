@@ -1,0 +1,37 @@
+#indice{
+    border-bottom: groove;
+    margin-left: 2%;
+    margin-right: 90%;
+}
+
+#holamundo{
+    border: solid;
+    border-width: 5px;
+    color: red;
+    width:14%
+    
+}
+#ciclovida{
+    font: "Times New Roman";
+    color:blue;
+    
+}
+
+#tituloheader{
+    border-bottom: groove;
+    margin-right: 80%;
+    color: blue;
+}
+#vuelta{
+    border: inset;
+    border-color: gray;
+    
+}
+
+#param{
+    border: double;
+    width: 25%;
+}
+#tituloparam{
+    text-align: center;
+}

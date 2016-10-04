@@ -1,0 +1,24 @@
+#formulario{
+    background-color: lightgreen;
+    color: darkred;
+}
+fieldset{
+    background-color: burlywood;
+    width: 50%;
+}
+
+body{
+    background-color: lightgreen;
+    color: darkred;
+}
+
+h3{
+    color:red;
+    text-align: center;
+    border-top: solid;
+    border-bottom: solid;
+}
+#servfor{
+    background-color: burlywood;
+    width:20%;
+}
