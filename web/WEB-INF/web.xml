@@ -20,6 +20,10 @@
         <servlet-name>FormSimple</servlet-name>
         <servlet-class>es.albarregas.servlets.FormSimple</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FormErrores</servlet-name>
+        <servlet-class>es.albarregas.servlets.FormErrores</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Cabeceras</servlet-name>
         <url-pattern>/Cabeceras</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>FormSimple</servlet-name>
         <url-pattern>/FormSimple</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FormErrores</servlet-name>
+        <url-pattern>/FormErrores</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

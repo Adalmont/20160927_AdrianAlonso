@@ -1,0 +1,14 @@
+div{
+    margin-left: 5px;
+}
+
+#errores{
+    width: 30%;
+    color:red;
+    border-bottom: solid;
+    border-color: black;
+}
+
+h3{
+    color:blue;
+}

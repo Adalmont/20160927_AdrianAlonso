@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Formulario con Errores</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/20160927_AdrianAlonso/css/estformerr.css">
+    </head>
+    <body>
+        <div>
+            <form action="../FormErrores">
+            <h3>Informaci&oacute;n personal</h3>
+            <p>*Nombre: <input type="text" name="Nombre"></p>
+            <p>Apellidos: <input type="text" name="Apellidos"></p>
+            <p>Sexo: <input type="radio" name="Sexo" value="Hombre" checked>Hombre
+                <input type="radio" name="Sexo" value="Mujer">Mujer</p>
+            <p>Fecha de nacimiento: <input type="number" name="Dia" min="1" max="31" value="1">/
+                <input type="number" name="Mes" min="1" max="12" value="1">/
+                <input type="number" name="Anio" min="1900" max="2016" value="1900"></p>
+            <br/>
+            <h3> Datos de Acceso</h3>
+            <p>*Usuario: <input type="text" name="Usuario"></p>
+            <p>*Contrase&ntilde;a: <input type="Password" name="Contrasena"></p>
+            <br/>
+            <h3>Aficiones</h3>
+            <p> <input type="checkbox" name="Deporte">Deporte
+                <input type="checkbox" name="Lectura">Lectura
+                <input type="checkbox" name="Cine">Cine
+                <input type="checkbox" name="Viajes">Viajes
+            </p>
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Limpiar">
+            </form>
+        </div>
+    </body>
+</html>
