@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Adrian
  */
-public class FormErrores extends HttpServlet {
+public class FormErrorActualizado extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,42 +33,52 @@ public class FormErrores extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println(cabecera());
-            //para controlar si se produce algun error uso variables booleanas
-            boolean errornombre= false;
-            boolean errorusuario=false;
-            boolean errorcontra=false;
-            boolean errorfecha=false;
+            boolean error= false;
+            boolean [] errores= {false, false, false, false};
+            //primero se comprueban cuales errores se han cometido (o no)
             if (request.getParameter("Nombre")==null||"".equals(request.getParameter("Nombre"))){
-                errornombre=true;
+                errores[0]=true;
             }
             if (request.getParameter("Usuario")==null||"".equals(request.getParameter("Usuario"))){
-                errorusuario=true;
+                errores[1]=true;
             }
             if (request.getParameter("Contrasena")==null || "".equals(request.getParameter("Contrasena"))){
-                errorcontra=true;
+                errores[2]=true;
             }
-            errorfecha=comprobarFecha(request.getParameter("Dia"), request.getParameter("Mes"),request.getParameter("Anio"));
-            //si alguno de los errores esta activos se muestra cual y se vuelve a imprimir el formulario
-            if (errornombre== true || errorusuario== true|| errorcontra==true|| errorfecha==true){
-                out.println("<div id=\"errores\"");
-                if (errornombre==true){
-                    out.println("<p><h1>Error en el Nombre!</h1></p>");
+            errores[3]=comprobarFecha(request.getParameter("Dia"), request.getParameter("Mes"),request.getParameter("Anio"));
+            for (int i=0;i<errores.length;i++){
+                if (errores[i]==true){
+                    error=true;
                 }
-                if (errorusuario==true){
-                    out.println("<p><h1>Error en el Usuario!</h1></p>");
+            }
+            /*si se comete algun error, se lleva al usuario a una pantalla de error, y despues se le 
+            devuelve al formulario, mostrandole que errores a cometido. si todo es correcto, se le muestran
+            los datos introducidos y se le da la posibilidad de corregir alguno o de volver al indice*/
+            if("Volver".equals(request.getParameter("corregir"))){
+                out.println("<div id=\"errores\">");
+                if(errores[0]==true){
+                    out.println("<h1>Error en el nombre</h1>");
                 }
-                if (errorcontra==true){
-                    out.println("<p><h1>Error en la Contrase&ntilde;a!!</h1></p>");
+                if(errores[1]==true){
+                    out.println("<h1>Error en el usuario</h1>");
                 }
-                if (errorfecha==true){
-                    out.println("<p><h1>Error en la Fecha!!</h1></p>");
+                if(errores[2]==true){
+                    out.println("<h1>Error en la contrase&ntilde;a</h1>");
+                }
+                if(errores[3]==true){
+                    out.println("<h1>Error en la fecha</h1>");
                 }
                 out.println("</div>");
-                out.println(formulario(request));
                 out.println("<div>");
-                
+                out.println(formulario(request));
+                out.println("</div>");
             }
-            //si no hay ningun error se procede a mostrar los datos
+            else{
+            if (error==true){
+                out.println("<h1>Error en los datos</h1>");
+                out.println(formOculto(request));
+                out.println("</form>");
+            }
             else{
                 Enumeration<String> parametros= request.getParameterNames();
                 out.println("<div>");
@@ -105,19 +115,26 @@ public class FormErrores extends HttpServlet {
                                             out.println("<p>"+parametro+": no proporcionado</p>");
                                             }
                                             else{
-                                            out.println("<p>"+parametro+": "+request.getParameter(parametro)+"</p>");}
+                                                if ("Envio".equals(parametro)){
+                                                    out.println("");
+                                                }
+                                                else{
+                                                    out.println("<p>"+parametro+": "+request.getParameter(parametro)+"</p>");}
+                                            }
                                         }
                                 }
                     
                 }
                 out.println("</div>");
+                out.println(formOculto(request));
                 out.println("<a href='index.html'><button type=\"button\">&Iacute;ndice</button></a>");
-                
+                out.println("</form>");
+            }
             }
             out.println(pie());
         }
     }
-    //este metodo comprueba que la fecha introducida sea valida, y devuelve un true si no lo es para activar el error
+    //metodo para comprobar la validez de la fecha introducida
     public boolean comprobarFecha(String dia, String mes, String anio){
         int dian = Integer.parseInt(dia);
         int mesn= Integer.parseInt(mes);
@@ -141,7 +158,7 @@ public class FormErrores extends HttpServlet {
     //este metodo imprime el formulario original conservando la informacion ya dada
     public String formulario(HttpServletRequest request){
         StringBuilder sb= new StringBuilder();
-           sb.append("<form action=\"FormErrores\" method=\"post\">"
+           sb.append("<form action=\"FormErrorActualizado\" method=\"post\">"
             +"<h3>Informaci&oacute;n personal</h3>"
             +"<p>*Nombre: <input type=\"text\" name=\"Nombre\" value=\""+request.getParameter("Nombre")+"\"></p>"
             +"<p>Apellidos: <input type=\"text\" name=\"Apellidos\" value=\""+request.getParameter("Apellidos")+"\"></p>");
@@ -153,10 +170,36 @@ public class FormErrores extends HttpServlet {
                        sb.append("<p>Sexo: <input type=\"radio\" name=\"Sexo\" value=\"Hombre\">Hombre"
                 +"<input type=\"radio\" name=\"Sexo\" value=\"Mujer\" checked>Mujer</p>");}
                    
-           sb.append("<p> Fecha de nacimiento: <input type=\"number\" name=\"Dia\" min=\"1\" max=\"31\" value=\""+request.getParameter("Dia")+"\">/"
-                +"<input type=\"number\" name=\"Mes\" min=\"1\" max=\"12\" value=\""+request.getParameter("Mes")+"\">/"
-                +"<input type=\"number\" name=\"Anio\" min=\"1900\" max=\"2016\" value=\""+request.getParameter("Anio")+"\"></p>"
-            +"<br/>"
+           sb.append("<p>Fecha de nacimiento: <select name=\"Dia\">");
+                    for (int i=1;i<=31;i++){
+                        if (i==Integer.parseInt(request.getParameter("Dia"))){
+                           sb.append("<option value=\""+i+"\" selected>"+i+"</option>");
+                        }
+                        else{
+                           sb.append("<option value=\""+i+"\">"+i+"</option>");
+                        }
+                    }
+            sb.append("</select>"
+            + "/<select name=\"Mes\">");
+                    for (int i=1;i<=12;i++){
+                        if (i==Integer.parseInt(request.getParameter("Mes"))){
+                           sb.append("<option value=\""+i+"\" selected>"+i+"</option>");
+                        }
+                        else{
+                           sb.append("<option value=\""+i+"\">"+i+"</option>");
+                        }
+                    }
+            sb.append("</select>"
+            + "/<select name=\"Anio\">");
+                    for (int i=1951;i<=1996;i++){
+                        if (i==Integer.parseInt(request.getParameter("Anio"))){
+                           sb.append("<option value=\""+i+"\" selected>"+i+"</option>");
+                        }
+                        else{
+                           sb.append("<option value=\""+i+"\">"+i+"</option>");
+                        }
+                    }
+            sb.append("</select></p><br/>"
             +"<h3> Datos de Acceso</h3>"
             +"<p>*Usuario: <input type=\"text\" name=\"Usuario\" value=\""+request.getParameter("Usuario")+"\"></p>"
             +"<p>*Contrase&ntilde;a: <input type=\"password\" name=\"Contrasena\" value=\""+request.getParameter("Contrasena")+"\"></p>"
@@ -182,10 +225,23 @@ public class FormErrores extends HttpServlet {
                sb.append("<input type=\"checkbox\" name=\"Viajes\">Viajes");
            }
             sb.append("</p>"
-            +"<input type=\"submit\" value=\"Enviar\">"
-            +"<a href='html/htmlformconerrores.html'><button type=\"button\">Limpiar</button></a>"
+            +"<input type=\"submit\" name=\"Envio\" value=\"Enviar\">"
+            +"<a href='html/htmlformerroresactualizado.html'><button type=\"button\">Limpiar</button></a>"
             +"</form>");
            return sb.toString();
+    }
+    //este metodo crea un formulario oculto para almacenar la informacion
+    public String formOculto(HttpServletRequest request){
+        StringBuilder sb= new StringBuilder();
+        Enumeration <String> parametros = request.getParameterNames();
+        String parametro;
+        sb.append("<form action=\"FormErrorActualizado\" method=\"post\">");
+        while (parametros.hasMoreElements()){
+            parametro=parametros.nextElement();
+            sb.append("<input type=\"hidden\" name=\""+parametro+"\" value=\""+request.getParameter(parametro)+"\">");
+        }
+        sb.append("<input type=\"submit\" name=\"corregir\" value=\"Volver\">");
+        return sb.toString();
     }
     //el metodo cabecera y pie simplemente sirven para ahorrarse out.prints en el metodo principal
     public String cabecera(){
@@ -193,8 +249,8 @@ public class FormErrores extends HttpServlet {
         sb.append("<!DOCTYPE html>"
             +"<html>"
             +"<head>"
-            +"<title>Formulario con errores</title>"
-            +"<link rel=\"stylesheet\" href=\"css/estformerr.css\">"
+            +"<title>Formulario con Errores Actualizado</title>"
+            +"<link rel=\"stylesheet\" href=\"css/estformacterr.css\">"
             +"</head>"
             +"<body>");
         return sb.toString();
@@ -206,7 +262,6 @@ public class FormErrores extends HttpServlet {
                 + "</html>");
         return sb.toString();
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

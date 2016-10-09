@@ -60,8 +60,8 @@ public class FormCompleto extends HttpServlet {
             out.println("<ul>"
                     + "<li>Internet: "+request.getParameter("internet")+"</li>"
                     + "<li>Sistema Operativo: "+request.getParameter("sistema")+"</li></ul>");
+            out.println("<a id= 'vuelta' href='index.html'>Regreso</a>");
             out.println("</div>");
-            out.println("<a id= 'vuelta' href='/20160927_AdrianAlonso/index.html'>Regreso</a>");
             out.println("</body>");
             out.println("</html>");
         }

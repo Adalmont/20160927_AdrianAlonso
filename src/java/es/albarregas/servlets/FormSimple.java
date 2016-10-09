@@ -41,7 +41,7 @@ public class FormSimple extends HttpServlet {
             out.println("<body>");
             out.println("<p>Nombre: "+request.getParameter("nombre")+"<br/>Apellido: "+
                     request.getParameter("apellido")+"<br/>Sexo: "+request.getParameter("genero") );
-            out.println("<a id= 'vuelta' href='/20160927_AdrianAlonso/index.html'>Regreso</a>");
+            out.println("<a id= 'vuelta' href='index.html'>Regreso</a>");
             out.println("</body>");
             out.println("</html>");
         }

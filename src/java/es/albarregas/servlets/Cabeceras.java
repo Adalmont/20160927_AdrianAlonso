@@ -54,7 +54,7 @@ public class Cabeceras extends HttpServlet {
                 
                 
             }
-            out.println("<a id= 'vuelta' href='/20160927_AdrianAlonso/index.html'>Regreso</a>");
+            out.println("<a id= 'vuelta' href='index.html'>Regreso</a>");
             out.println("</body>");
             out.println("</html>");
         }

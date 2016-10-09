@@ -53,7 +53,7 @@ public class ParametrosIniciales extends HttpServlet {
             out.println("</ul>");
             out.println("</div>");
             out.println("<br/>");
-            out.println("<a id= 'vuelta' href='/20160927_AdrianAlonso/index.html'>Regreso</a>");
+            out.println("<a id= 'vuelta' href='index.html'>Regreso</a>");
             out.println("</body>");
             out.println("</html>");
         }

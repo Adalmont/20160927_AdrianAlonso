@@ -35,7 +35,7 @@ public class CicloVida extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1 id='ciclovida'>Ciclo de Vida</h1>");
-            out.println("<a id= 'vuelta' href='/20160927_AdrianAlonso/index.html'>Regreso</a>");
+            out.println("<a id= 'vuelta' href='index.html'>Regreso</a>");
             out.println("</body>");
             out.println("</html>");
     }
