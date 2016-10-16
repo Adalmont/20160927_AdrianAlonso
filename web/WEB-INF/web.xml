@@ -32,6 +32,14 @@
         <servlet-name>FormCorregir</servlet-name>
         <servlet-class>es.albarregas.servlets.FormCorregir</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ContadorVisitaCookies</servlet-name>
+        <servlet-class>es.albarregas.servlets.ContadorVisitaCookies</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContadorVisitasSesion</servlet-name>
+        <servlet-class>es.albarregas.servlets.ContadorVisitasSesion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Cabeceras</servlet-name>
         <url-pattern>/Cabeceras</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>FormCorregir</servlet-name>
         <url-pattern>/FormCorregir</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContadorVisitaCookies</servlet-name>
+        <url-pattern>/ContadorVisitaCookies</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContadorVisitasSesion</servlet-name>
+        <url-pattern>/ContadorVisitasSesion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
