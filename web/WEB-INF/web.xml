@@ -40,6 +40,10 @@
         <servlet-name>ContadorVisitasSesion</servlet-name>
         <servlet-class>es.albarregas.servlets.ContadorVisitasSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Sesiones</servlet-name>
+        <servlet-class>es.albarregas.servlets.Sesiones</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Cabeceras</servlet-name>
         <url-pattern>/Cabeceras</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>ContadorVisitasSesion</servlet-name>
         <url-pattern>/ContadorVisitasSesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Sesiones</servlet-name>
+        <url-pattern>/Sesiones</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

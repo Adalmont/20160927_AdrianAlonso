@@ -1,1 +1,1 @@
-Actualizado hasta los Contadores con cookies y sesiones
+"Actualizado hasta la tienda de libros
